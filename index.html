@@ -90,12 +90,30 @@ td:first-child{
 
 
 .status{
-
-    padding:6px 12px;
+    padding:7px 14px;
     border-radius:20px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+.green{
     background:#dff5df;
     color:#006633;
-    font-weight:bold;
+}
+
+.yellow{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.red{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.gray{
+    background:#e2e3e5;
+    color:#383d41;
 
 }
 
@@ -282,8 +300,9 @@ ${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
 
 
 <tr>
-<td>Status</td>
-<td><span class="status">${asset["Status"]}</span></td>
+<span class="status ${asset["Status"].replace(/\s+/g,'').toLowerCase()}">
+${asset["Status"]}
+</span>
 </tr>
 
 
