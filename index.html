@@ -61,7 +61,7 @@ Loading asset...
 const params=new URLSearchParams(window.location.search);
 const assetID=params.get("id");
 
-fetch("assets.csv")
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
 .then(response=>response.text())
 .then(data=>{
 
