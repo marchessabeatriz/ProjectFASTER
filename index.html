@@ -1,135 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Project FASTER</title>
 
 <style>
+
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f2f2f2;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef5f0;
     margin:0;
-    padding:40px;
+    padding:20px;
 }
+
 .card{
-    max-width:800px;
+
+    max-width:700px;
     margin:auto;
     background:white;
     padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
 }
-img{
-    width:250px;
-    border-radius:10px;
+
+.header{
+    text-align:center;
     margin-bottom:20px;
 }
-h1{
+
+.header h1{
+
     color:#006633;
+    margin-bottom:5px;
+
 }
+
+.header p{
+
+    color:#555;
+    margin-top:0;
+
+}
+
+
+#content{
+
+    text-align:center;
+
+}
+
+
+img{
+
+    width:300px;
+    max-width:100%;
+    border-radius:15px;
+    margin:20px auto;
+}
+
+
 table{
+
     width:100%;
     border-collapse:collapse;
+    margin-top:20px;
+
 }
+
+
 td{
-    padding:10px;
+
+    padding:12px;
     border-bottom:1px solid #ddd;
+
 }
+
+
 td:first-child{
+
     font-weight:bold;
-    width:220px;
+    color:#006633;
+    width:40%;
+
 }
+
+
+.status{
+
+    padding:6px 12px;
+    border-radius:20px;
+    background:#dff5df;
+    color:#006633;
+    font-weight:bold;
+
+}
+
+
+.footer{
+
+    text-align:center;
+    margin-top:30px;
+    font-size:12px;
+    color:#777;
+
+}
+
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="card">
 
-<h1>Project FASTER</h1>
+
+<div class="header">
+
+<h1>MAMBAGO-A ELEMENTARY SCHOOL</h1>
+
+<h2>Project FASTER</h2>
+
+<p>Fixed Assets and Supplies Tracking through Electronic Records</p>
+
+</div>
+
+
 
 <div id="content">
+
 Loading asset...
-</div>
 
 </div>
+
+
+
+<div class="footer">
+
+Scan verified through Project FASTER<br>
+SY 2026-2027
+
+</div>
+
+
+
+</div>
+
+
+
 
 <script>
 
+
 const params=new URLSearchParams(window.location.search);
+
 const assetID=params.get("id");
 
+
+
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
+
 .then(response=>response.text())
+
 .then(data=>{
+
 
 const rows=data.trim().split("\n");
 
 const headers=rows[0].split(",");
 
+
+
 const assets=rows.slice(1).map(row=>{
+
 
 const values=row.split(",");
 
 let obj={};
 
+
 headers.forEach((header,index)=>{
+
 obj[header.trim()]=values[index];
+
 });
+
 
 return obj;
 
+
 });
+
+
 
 const asset=assets.find(a=>a["Asset ID"]===assetID);
 
+
+
 if(!asset){
 
-document.getElementById("content").innerHTML="<h2>Asset not found.</h2>";
+
+document.getElementById("content").innerHTML=
+
+"<h2>Asset not found.</h2>";
+
 
 return;
 
+
 }
+
+
+
 
 document.getElementById("content").innerHTML=`
 
 ${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
 
+
 <table>
 
-<tr><td>Asset ID</td><td>${asset["Asset ID"]}</td></tr>
 
-<tr><td>Property No.</td><td>${asset["Property No."]}</td></tr>
+<tr>
+<td>Asset ID</td>
+<td>${asset["Asset ID"]}</td>
+</tr>
 
-<tr><td>Item</td><td>${asset["Item"]}</td></tr>
 
-<tr><td>Description</td><td>${asset["Description"]}</td></tr>
+<tr>
+<td>Property No.</td>
+<td>${asset["Property No."]}</td>
+</tr>
 
-<tr><td>Brand</td><td>${asset["Brand"]}</td></tr>
 
-<tr><td>Serial No.</td><td>${asset["Serial No."]}</td></tr>
+<tr>
+<td>Item</td>
+<td>${asset["Item"]}</td>
+</tr>
 
-<tr><td>Accountable Person</td><td>${asset["Accountable Person"]}</td></tr>
 
-<tr><td>Room</td><td>${asset["Room"]}</td></tr>
+<tr>
+<td>Description</td>
+<td>${asset["Description"]}</td>
+</tr>
 
-<tr><td>Condition</td><td>${asset["Condition"]}</td></tr>
 
-<tr><td>Status</td><td>${asset["Status"]}</td></tr>
+<tr>
+<td>Brand</td>
+<td>${asset["Brand"]}</td>
+</tr>
 
-<tr><td>Photo</td><td>${asset["Photo"]}</td></tr>
 
-<tr><td>PAR</td><td>${asset["PAR"]}</td></tr>
+<tr>
+<td>Serial No.</td>
+<td>${asset["Serial No."]}</td>
+</tr>
+
+
+<tr>
+<td>Accountable Person</td>
+<td>${asset["Accountable Person"]}</td>
+</tr>
+
+
+<tr>
+<td>Room</td>
+<td>${asset["Room"]}</td>
+</tr>
+
+
+<tr>
+<td>Condition</td>
+<td>${asset["Condition"]}</td>
+</tr>
+
+
+<tr>
+<td>Status</td>
+<td><span class="status">${asset["Status"]}</span></td>
+</tr>
+
+
+<tr>
+<td>PAR</td>
+<td>${asset["PAR"]}</td>
+</tr>
+
+
 
 </table>
 
+
 `;
+
+
 
 });
 
+
 </script>
 
+
 </body>
+
 </html>
