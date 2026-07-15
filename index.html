@@ -90,43 +90,12 @@ td:first-child{
 
 
 .status{
-    padding:7px 14px;
+
+    padding:6px 12px;
     border-radius:20px;
+    background:#dff5df;
+    color:#006633;
     font-weight:bold;
-    display:inline-block;
-}
-
-.green{
-    background:#d4edda;
-    color:#155724;
-}
-
-.red{
-    background:#f8d7da;
-    color:#721c24;
-}
-
-.black{
-    background:#343a40;
-    color:#ffffff;
-}
-
-.gray{
-    background:#e2e3e5;
-    color:#383d41;
-
-    let status = (asset["Status"] || "").trim().toLowerCase();
-
-let statusClass = "gray";
-
-if(status === "in use"){
-    statusClass = "green";
-}
-else if(status === "not in use"){
-    statusClass = "red";
-}
-else if(status === "for disposal"){
-    statusClass = "black";
 
 }
 
@@ -313,7 +282,8 @@ ${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
 
 
 <tr>
-<td><span class="status ${statusClass}">${asset["Status"]}</span></td>
+<td>Status</td>
+<td><span class="status">${asset["Status"]}</span></td>
 </tr>
 
 
