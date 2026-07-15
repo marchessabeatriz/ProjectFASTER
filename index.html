@@ -17,14 +17,12 @@ body{
 }
 
 .card{
-
     max-width:700px;
     margin:auto;
     background:white;
     padding:30px;
     border-radius:20px;
     box-shadow:0 5px 20px rgba(0,0,0,.15);
-
 }
 
 .header{
@@ -33,80 +31,89 @@ body{
 }
 
 .header h1{
-
     color:#006633;
     margin-bottom:5px;
+    font-size:26px;
+}
 
+.header h2{
+    color:#444;
+    margin:5px;
 }
 
 .header p{
-
-    color:#555;
-    margin-top:0;
-
+    color:#666;
 }
-
 
 #content{
-
     text-align:center;
-
 }
 
-
 img{
-
     width:300px;
     max-width:100%;
     border-radius:15px;
     margin:20px auto;
 }
 
-
 table{
-
     width:100%;
     border-collapse:collapse;
     margin-top:20px;
-
+    text-align:left;
 }
-
 
 td{
-
     padding:12px;
     border-bottom:1px solid #ddd;
-
 }
 
-
 td:first-child{
-
     font-weight:bold;
     color:#006633;
     width:40%;
-
 }
 
 
-.status{
+/* STATUS COLORS */
 
-    padding:6px 12px;
+.status{
+    padding:7px 14px;
     border-radius:20px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+
+.green{
     background:#dff5df;
     color:#006633;
-    font-weight:bold;
+}
 
+
+.yellow{
+    background:#fff3cd;
+    color:#856404;
+}
+
+
+.red{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+
+.gray{
+    background:#e2e3e5;
+    color:#383d41;
 }
 
 
 .footer{
-
     text-align:center;
     margin-top:30px;
     font-size:12px;
     color:#777;
-
 }
 
 
@@ -127,18 +134,16 @@ td:first-child{
 
 <h2>Project FASTER</h2>
 
-<p>Fixed Assets and Supplies Tracking through Electronic Records</p>
+<p>
+Fixed Assets and Supplies Tracking through Electronic Records
+</p>
 
 </div>
-
 
 
 <div id="content">
-
 Loading asset...
-
 </div>
-
 
 
 <div class="footer">
@@ -149,9 +154,7 @@ SY 2026-2027
 </div>
 
 
-
 </div>
-
 
 
 
@@ -205,23 +208,51 @@ const asset=assets.find(a=>a["Asset ID"]===assetID);
 
 if(!asset){
 
-
 document.getElementById("content").innerHTML=
-
 "<h2>Asset not found.</h2>";
 
-
 return;
-
 
 }
 
 
 
 
+let status = asset["Status"]
+? asset["Status"].toLowerCase()
+: "";
+
+let statusClass="gray";
+
+
+if(
+status.includes("use") ||
+status.includes("serviceable")
+){
+statusClass="green";
+}
+
+else if(
+status.includes("not") ||
+status.includes("repair")
+){
+statusClass="yellow";
+}
+
+else if(
+status.includes("unserviceable") ||
+status.includes("missing")
+){
+statusClass="red";
+}
+
+
+
 document.getElementById("content").innerHTML=`
 
+
 ${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
+
 
 
 <table>
@@ -283,7 +314,13 @@ ${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
 
 <tr>
 <td>Status</td>
-<td><span class="status">${asset["Status"]}</span></td>
+
+<td>
+<span class="status ${statusClass}">
+${asset["Status"]}
+</span>
+</td>
+
 </tr>
 
 
@@ -291,7 +328,6 @@ ${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
 <td>PAR</td>
 <td>${asset["PAR"]}</td>
 </tr>
-
 
 
 </table>
