@@ -181,12 +181,17 @@ td:first-child{
         text-align:center;
     }
 
-    table{
-        width:100%;
-        display:block;
-        overflow-x:auto;
-        white-space:nowrap;
-    }
+table{
+    width:100%;
+    table-layout:fixed;
+}
+
+td,
+th{
+    white-space:normal;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+}
 
     td,
     th{
