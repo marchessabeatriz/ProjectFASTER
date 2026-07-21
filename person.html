@@ -147,7 +147,7 @@ Loading employee...
 <script>
 
 const params = new URLSearchParams(window.location.search);
-const teacherID = (params.get("teacher") || "").trim();
+const teacherID = (params.get("id") || params.get("teacher") || "").trim();
 
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
 
