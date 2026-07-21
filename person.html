@@ -3,131 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project FASTER</title>
+<title>Project FASTER - Property Accountability Profile</title>
 
-<style>
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f2f2f2;
-    margin:0;
-    padding:40px;
-}
-.card{
-    max-width:800px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
-img{
-    width:250px;
-    border-radius:10px;
-    margin-bottom:20px;
-}
-h1{
-    color:#006633;
-}
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-}
-td:first-child{
-    font-weight:bold;
-    width:220px;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
 </head>
 
 <body>
 
-<div class="card">
+<h1>Property Accountability Profile</h1>
 
-<h1>Project FASTER</h1>
-
-<div id="content">
-Loading asset...
-</div>
-
-</div>
-
-<script>
-
-const params=new URLSearchParams(window.location.search);
-const assetID=params.get("id");
-
-fetch("assets.csv")
-.then(response=>response.text())
-.then(data=>{
-
-const rows=data.trim().split("\n");
-
-const headers=rows[0].split(",");
-
-const assets=rows.slice(1).map(row=>{
-
-const values=row.split(",");
-
-let obj={};
-
-headers.forEach((header,index)=>{
-obj[header.trim()]=values[index];
-});
-
-return obj;
-
-});
-
-const asset=assets.find(a=>a["Asset ID"]===assetID);
-
-if(!asset){
-
-document.getElementById("content").innerHTML="<h2>Asset not found.</h2>";
-
-return;
-
-}
-
-document.getElementById("content").innerHTML=`
-
-${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
-
-<table>
-
-<tr><td>Asset ID</td><td>${asset["Asset ID"]}</td></tr>
-
-<tr><td>Property No.</td><td>${asset["Property No."]}</td></tr>
-
-<tr><td>Item</td><td>${asset["Item"]}</td></tr>
-
-<tr><td>Description</td><td>${asset["Description"]}</td></tr>
-
-<tr><td>Brand</td><td>${asset["Brand"]}</td></tr>
-
-<tr><td>Serial No.</td><td>${asset["Serial No."]}</td></tr>
-
-<tr><td>Accountable Person</td><td>${asset["Accountable Person"]}</td></tr>
-
-<tr><td>Room</td><td>${asset["Room"]}</td></tr>
-
-<tr><td>Condition</td><td>${asset["Condition"]}</td></tr>
-
-<tr><td>Status</td><td>${asset["Status"]}</td></tr>
-
-<tr><td>PAR</td><td>${asset["PAR"]}</td></tr>
-
-</table>
-
-`;
-
-});
-
-</script>
+<p>Loading...</p>
 
 </body>
+
 </html>
