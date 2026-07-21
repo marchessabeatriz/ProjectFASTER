@@ -20,7 +20,7 @@ Loading employee...
 <script>
 
 const params = new URLSearchParams(window.location.search);
-const teacherID = params.get("teacher");
+const teacherID = (params.get("teacher") || "").trim();
 
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
 
@@ -38,7 +38,10 @@ document.getElementById("content").innerHTML =
 
 return;
 
-const teacherAssets = assets.filter(a => a["Employee ID"] === teacherID);
+const teacherAssets = assets.filter(a =>
+    a["Employee ID"] &&
+    a["Employee ID"].trim() === teacherID.trim()
+);
 
 if(teacherAssets.length === 0){
 
