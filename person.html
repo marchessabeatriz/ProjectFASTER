@@ -235,60 +235,6 @@ html += `
 
 document.getElementById("content").innerHTML = html;
 
-<h2>${employeeName}</h2>
-
-<p><strong>Position:</strong> ${position}</p>
-
-<p><strong>Employee ID:</strong> ${teacherID}</p>
-
-<p><strong>Total Accountable Assets:</strong> ${teacherAssets.length}</p>
-
-<table>
-
-<tr>
-
-<th>Asset ID</th>
-
-<th>Item</th>
-
-<th>Status</th>
-
-</tr>
-
-`;
-
-teacherAssets.forEach(asset=>{
-
-html += `
-
-<tr>
-
-<td>
-<a href="index.html?id=${asset["Asset ID"]}" target="_blank">
-${asset["Asset ID"]}
-</a>
-</td>
-
-<td>${asset["Item"]}</td>
-
-<td>${asset["Status"]}</td>
-
-</tr>
-
-`;
-
-});
-
-html += `
-
-</table>
-
-</div>
-
-`;
-
-document.getElementById("content").innerHTML = html;
-
 });
 
 </script>
