@@ -22,13 +22,79 @@ Loading employee...
 <script>
 
 const params = new URLSearchParams(window.location.search);
-
 const teacherID = params.get("teacher");
 
-document.getElementById("content").innerHTML = `
-<h2>Employee ID</h2>
-<p>${teacherID}</p>
+fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
+
+.then(response => response.text())
+
+.then(data => {
+
+const assets = Papa.parse(data,{
+    header:true,
+    skipEmptyLines:true
+}).data;
+
+const teacherAssets = assets.filter(a => a["Employee ID"] === teacherID);
+
+if(teacherAssets.length === 0){
+
+document.getElementById("content").innerHTML = "<h2>No records found.</h2>";
+
+return;
+
+}
+
+const employeeName = teacherAssets[0]["Accountable Person"];
+const position = teacherAssets[0]["Position"];
+
+let html = `
+
+<h2>${employeeName}</h2>
+
+<p><strong>Position:</strong> ${position}</p>
+
+<p><strong>Employee ID:</strong> ${teacherID}</p>
+
+<p><strong>Total Accountable Assets:</strong> ${teacherAssets.length}</p>
+
+<table>
+
+<tr>
+
+<th>Asset ID</th>
+
+<th>Item</th>
+
+<th>Status</th>
+
+</tr>
+
 `;
+
+teacherAssets.forEach(asset=>{
+
+html += `
+
+<tr>
+
+<td>${asset["Asset ID"]}</td>
+
+<td>${asset["Item"]}</td>
+
+<td>${asset["Status"]}</td>
+
+</tr>
+
+`;
+
+});
+
+html += "</table>";
+
+document.getElementById("content").innerHTML = html;
+
+});
 
 </script>
 
