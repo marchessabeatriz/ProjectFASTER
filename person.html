@@ -40,7 +40,88 @@ const teacherAssets = assets.filter(a =>
 
 if(teacherAssets.length === 0){
 
-document.getElementById("content").innerHTML = "<h2>No records found.</h2>";
+let html = `
+
+<div class="profile-card">
+
+<h2>${employeeName}</h2>
+
+<table class="info-table">
+
+<tr>
+<td><strong>Employee ID</strong></td>
+<td>${teacherID}</td>
+</tr>
+
+<tr>
+<td><strong>Position</strong></td>
+<td>${position}</td>
+</tr>
+
+<tr>
+<td><strong>Total Accountable Assets</strong></td>
+<td>${teacherAssets.length}</td>
+</tr>
+
+</table>
+
+<br>
+
+<h3>Assigned Properties</h3>
+
+<table class="asset-table">
+
+<thead>
+
+<tr>
+
+<th>Asset ID</th>
+
+<th>Item</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
+
+teacherAssets.forEach(asset=>{
+
+html += `
+
+<tr>
+
+<td>
+<a href="index.html?id=${asset["Asset ID"]}" target="_blank">
+${asset["Asset ID"]}
+</a>
+</td>
+
+<td>${asset["Item"]}</td>
+
+<td>${asset["Status"]}</td>
+
+</tr>
+
+`;
+
+});
+
+html += `
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+document.getElementById("content").innerHTML = html;
 
 return;
 
@@ -79,7 +160,11 @@ html += `
 
 <tr>
 
-<td>${asset["Asset ID"]}</td>
+<td>
+<a href="index.html?id=${asset["Asset ID"]}" target="_blank">
+${asset["Asset ID"]}
+</a>
+</td>
 
 <td>${asset["Item"]}</td>
 
