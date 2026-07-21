@@ -33,7 +33,10 @@ const assets = Papa.parse(data,{
     skipEmptyLines:true
 }).data;
 
-const teacherAssets = assets.filter(a => a["Employee ID"] === teacherID);
+const teacherAssets = assets.filter(a =>
+    a["Employee ID"] &&
+    a["Employee ID"].trim() === teacherID.trim()
+);
 
 if(teacherAssets.length === 0){
 
