@@ -150,15 +150,34 @@ const position = teacherAssets[0]["Position"];
 
 let html = `
 
+<div class="card">
+
+<h1>Property Accountability Profile</h1>
+
 <h2>${employeeName}</h2>
 
-<p><strong>Position:</strong> ${position}</p>
+<table class="info-table">
 
-<p><strong>Employee ID:</strong> ${teacherID}</p>
+<tr>
+<td>Employee ID</td>
+<td>${teacherID}</td>
+</tr>
 
-<p><strong>Total Accountable Assets:</strong> ${teacherAssets.length}</p>
+<tr>
+<td>Position</td>
+<td>${position}</td>
+</tr>
 
-<table>
+<tr>
+<td>Total Accountable Assets</td>
+<td>${teacherAssets.length}</td>
+</tr>
+
+</table>
+
+<h3>Assigned Properties</h3>
+
+<table class="asset-table">
 
 <tr>
 
@@ -194,7 +213,13 @@ ${asset["Asset ID"]}
 
 });
 
-html += "</table>";
+html += `
+
+</table>
+
+</div>
+
+`;
 
 document.getElementById("content").innerHTML = html;
 
