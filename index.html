@@ -150,14 +150,15 @@ td:first-child{
 
     .card{
         width:100%;
+        padding:15px;
+    }
+
+    .header{
         padding:18px;
-        box-sizing:border-box;
     }
 
     .logos{
         flex-direction:column;
-        justify-content:center;
-        align-items:center;
         gap:10px;
     }
 
@@ -166,41 +167,51 @@ td:first-child{
         height:60px;
     }
 
-    h1{
+    .header h1{
         font-size:24px;
-        text-align:center;
     }
 
-    h2{
-        font-size:20px;
-        text-align:center;
+    .header h2{
+        font-size:18px;
     }
 
-    h3{
-        font-size:16px;
-        text-align:center;
+    .header p{
+        font-size:13px;
     }
 
-table{
-    width:100%;
-    table-layout:fixed;
-}
+    table,
+    tbody,
+    tr,
+    td{
+        display:block;
+        width:100%;
+    }
 
-td,
-th{
-    white-space:normal;
-    word-wrap:break-word;
-    overflow-wrap:anywhere;
-}
+    tr{
+        margin-bottom:15px;
+        border-bottom:1px solid #ddd;
+        padding-bottom:10px;
+    }
 
-    td,
-    th{
-        font-size:14px;
-        padding:8px;
+    td{
+        border:none;
+        padding:4px 0;
+        text-align:left;
+        white-space:normal;
+        word-break:break-word;
+        overflow-wrap:anywhere;
+    }
+
+    td:first-child{
+        width:100%;
+        font-weight:bold;
+        color:#003399;
+        margin-bottom:4px;
     }
 
     img{
-        max-width:100%;
+        width:100%;
+        max-width:280px;
         height:auto;
     }
 
