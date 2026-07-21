@@ -3,389 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project FASTER - Property Accountability Profile</title>
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<title>Project FASTER</title>
 
 <style>
-
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#eef5f5;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f2f2f2;
     margin:0;
-    padding:25px;
+    padding:40px;
 }
-
 .card{
-    max-width:1000px;
-    margin:auto;
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
-}
-
-.banner{
-    background:#163c96;
-    color:white;
-    text-align:center;
-    padding:25px;
-}
-
-.banner h1{
-    margin:0;
-    color:#FFD700;
-    font-size:38px;
-}
-
-.banner h2{
-    margin:8px 0;
-    font-size:26px;
-}
-
-.banner p{
-    margin:0;
-    font-size:18px;
-}
-
-.content{
-    padding:30px;
-}
-
-.employee-name{
-    text-align:center;
-    color:#006633;
-    font-size:32px;
-    margin-bottom:25px;
-}
-
-.info-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-bottom:30px;
-}
-
-.info-table td{
-    border:1px solid #ddd;
-    padding:12px;
-}
-
-.info-table td:first-child{
-    width:260px;
-    background:#163c96;
-    color:white;
-    font-weight:bold;
-}
-
-.asset-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-.asset-table th{
-    background:#006633;
-    color:white;
-    padding:12px;
-}
-
-.asset-table td{
-    padding:12px;
-    border-bottom:1px solid #ddd;
-}
-
-.asset-table tr:nth-child(even){
-    background:#f8f8f8;
-}
-
-.asset-table tr:hover{
-    background:#eef5ff;
-}
-
-.asset-table a{
-    color:#163c96;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-.asset-table a:hover{
-    text-decoration:underline;
-}
-
-.status{
-    background:#dff5df;
-    color:#006633;
-    padding:6px 14px;
-    border-radius:20px;
-    font-weight:bold;
-}
-
-.footer{
-    text-align:center;
-    color:#777;
-    padding:20px;
-    font-size:13px;
-}
-
-</style>
-
-</head>
-
-<style>
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#eef5f5;
-    margin:0;
-    padding:25px;
-}
-
-.card{
-    max-width:1000px;
+    max-width:800px;
     margin:auto;
     background:white;
     padding:30px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
-
+img{
+    width:250px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
 h1{
-    text-align:center;
-    color:#163c96;
-}
-
-h2{
     color:#006633;
-    margin-top:10px;
 }
-
-.info-table{
-
+table{
     width:100%;
     border-collapse:collapse;
-    margin-bottom:30px;
-
 }
-
-.info-table td{
-
-    border:1px solid #ddd;
-    padding:12px;
-
-}
-
-.info-table td:first-child{
-
-    width:220px;
-    background:#f3f6fb;
-    font-weight:bold;
-
-}
-
-.asset-table{
-
-    width:100%;
-    border-collapse:collapse;
-
-}
-
-.asset-table th{
-
-    background:#163c96;
-    color:white;
-    padding:12px;
-
-}
-
-.asset-table td{
-
+td{
+    padding:10px;
     border-bottom:1px solid #ddd;
-    padding:12px;
-
 }
-
-.asset-table tr:nth-child(even){
-
-    background:#f8f8f8;
-
-}
-
-.asset-table tr:hover{
-
-    background:#eef4ff;
-
-}
-
-.asset-table a{
-
-    color:#163c96;
+td:first-child{
     font-weight:bold;
-    text-decoration:none;
-
+    width:220px;
 }
-
-.asset-table a:hover{
-
-    text-decoration:underline;
-
-}
-
 </style>
 
 </head>
 
 <body>
 
-<body>
+<div class="card">
+
+<h1>Project FASTER</h1>
 
 <div id="content">
-Loading employee...
+Loading asset...
+</div>
+
 </div>
 
 <script>
 
-const params = new URLSearchParams(window.location.search);
-const teacherID = (params.get("teacher") || "").trim();
+const params=new URLSearchParams(window.location.search);
+const assetID=params.get("id");
 
-fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
+fetch("assets.csv")
+.then(response=>response.text())
+.then(data=>{
 
-.then(response => response.text())
+const rows=data.trim().split("\n");
 
-.then(data => {
+const headers=rows[0].split(",");
 
-const assets = Papa.parse(data,{
-    header:true,
-    skipEmptyLines:true
-}).data;
+const assets=rows.slice(1).map(row=>{
 
-const teacherAssets = assets.filter(a =>
-    a["Employee ID"] &&
-    a["Employee ID"].trim() === teacherID.trim()
-);
+const values=row.split(",");
 
-if(teacherAssets.length === 0){
+let obj={};
 
-}
+headers.forEach((header,index)=>{
+obj[header.trim()]=values[index];
+});
 
-const employeeName = teacherAssets[0]["Accountable Person"];
-const position = teacherAssets[0]["Position"];
-
-let html = `
-
-let html = `
-
-<div class="card">
-
-<div class="banner">
-
-<h1>PROJECT FASTER</h1>
-
-<h2>Mambago-A Elementary School</h2>
-
-<p>Property Accountability Profile</p>
-
-</div>
-
-<div class="content">
-
-<h2 class="employee-name">${employeeName}</h2>
-
-<table class="info-table">
-
-<tr>
-<td>Employee ID</td>
-<td>${teacherID}</td>
-</tr>
-
-<tr>
-<td>Position</td>
-<td>${position}</td>
-</tr>
-
-<tr>
-<td>Total Accountable Assets</td>
-<td>${teacherAssets.length}</td>
-</tr>
-
-</table>
-
-<h3>Assigned Properties</h3>
-
-<table class="asset-table">
-
-<tr>
-
-<th>Asset ID</th>
-
-<th>Item</th>
-
-<th>Status</th>
-
-</tr>
-
-`;
-
-teacherAssets.forEach(asset=>{
-
-html += `
-
-<tr>
-
-<td>
-
-<a href="index.html?id=${asset["Asset ID"]}" target="_blank">
-
-${asset["Asset ID"]}
-
-</a>
-
-</td>
-
-<td>${asset["Item"]}</td>
-
-<td>
-
-<span class="status">
-
-${asset["Status"]}
-
-</span>
-
-</td>
-
-</tr>
-
-`;
+return obj;
 
 });
 
-html += `
+const asset=assets.find(a=>a["Asset ID"]===assetID);
+
+if(!asset){
+
+document.getElementById("content").innerHTML="<h2>Asset not found.</h2>";
+
+return;
+
+}
+
+document.getElementById("content").innerHTML=`
+
+${asset["Photo"] ? `<img src="${asset["Photo"]}">` : ""}
+
+<table>
+
+<tr><td>Asset ID</td><td>${asset["Asset ID"]}</td></tr>
+
+<tr><td>Property No.</td><td>${asset["Property No."]}</td></tr>
+
+<tr><td>Item</td><td>${asset["Item"]}</td></tr>
+
+<tr><td>Description</td><td>${asset["Description"]}</td></tr>
+
+<tr><td>Brand</td><td>${asset["Brand"]}</td></tr>
+
+<tr><td>Serial No.</td><td>${asset["Serial No."]}</td></tr>
+
+<tr><td>Accountable Person</td><td>${asset["Accountable Person"]}</td></tr>
+
+<tr><td>Room</td><td>${asset["Room"]}</td></tr>
+
+<tr><td>Condition</td><td>${asset["Condition"]}</td></tr>
+
+<tr><td>Status</td><td>${asset["Status"]}</td></tr>
+
+<tr><td>PAR</td><td>${asset["PAR"]}</td></tr>
 
 </table>
 
-</div>
-
-<div class="footer">
-
-Generated by Project FASTER<br>
-
-Mambago-A Elementary School<br>
-
-Department of Education
-
-</div>
-
-</div>
-
 `;
-
-document.getElementById("content").innerHTML = html;
 
 });
 
 </script>
 
 </body>
-
-</body>
-
 </html>
