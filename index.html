@@ -17,15 +17,15 @@ body{
 }
 
 .card{
-
-    max-width:700px;
+    max-width:1000px;
+    width:100%;
     margin:auto;
     background:white;
-    padding:30px;
+    padding:25px;
     border-radius:20px;
     box-shadow:0 12px 30px rgba(0,0,0,.18);
     border-top:8px solid #003399;
-
+    box-sizing:border-box;
 }
 
 .header{
@@ -39,17 +39,20 @@ body{
 .logos{
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
     gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
 .logo{
-    width:80px;
-    height:80px;
+    width:70px;
+    height:70px;
     object-fit:contain;
     background:white;
     padding:5px;
     border-radius:50%;
+    flex-shrink:0;
 }
 
 .title{
@@ -135,7 +138,68 @@ td:first-child{
     color:#777;
 
 }
+/* ===========================
+   MOBILE RESPONSIVE DESIGN
+=========================== */
 
+@media (max-width:768px){
+
+    body{
+        padding:10px;
+    }
+
+    .card{
+        width:100%;
+        padding:18px;
+        box-sizing:border-box;
+    }
+
+    .logos{
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        gap:10px;
+    }
+
+    .logo{
+        width:60px;
+        height:60px;
+    }
+
+    h1{
+        font-size:24px;
+        text-align:center;
+    }
+
+    h2{
+        font-size:20px;
+        text-align:center;
+    }
+
+    h3{
+        font-size:16px;
+        text-align:center;
+    }
+
+    table{
+        width:100%;
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+
+    td,
+    th{
+        font-size:14px;
+        padding:8px;
+    }
+
+    img{
+        max-width:100%;
+        height:auto;
+    }
+
+}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
