@@ -37,11 +37,6 @@ const assets = Papa.parse(data,{
     skipEmptyLines:true
 }).data;
 
-document.getElementById("content").innerHTML =
-"<pre>"+JSON.stringify(assets[0], null, 2)+"</pre>";
-
-return;
-
 const teacherAssets = assets.filter(a =>
     a["Employee ID"] &&
     a["Employee ID"].trim() === teacherID.trim()
