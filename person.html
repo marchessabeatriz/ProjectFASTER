@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Project FASTER - Accountable Person</title>
+<title>Project FASTER - Property Accountability Profile</title>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
@@ -15,7 +11,24 @@
 
 <body>
 
-<h1>Loading...</h1>
+<h1>Property Accountability Profile</h1>
+
+<div id="content">
+Loading employee...
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const teacherID = params.get("teacher");
+
+document.getElementById("content").innerHTML = `
+<h2>Employee ID</h2>
+<p>${teacherID}</p>
+`;
+
+</script>
 
 </body>
 
