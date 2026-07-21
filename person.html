@@ -22,7 +22,7 @@ Loading employee...
 <script>
 
 const params = new URLSearchParams(window.location.search);
-const teacherID = params.get("teacher");
+const teacherID = (params.get("teacher") || "").trim();
 
 fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTpbKjz1OdKV0DfYzeUVVUWuYr_E1ehDhMR1uSgYc6imNyqtrWcEKJwlkhkFGRQiQ/pub?output=csv")
 
@@ -35,21 +35,12 @@ const assets = Papa.parse(data,{
     skipEmptyLines:true
 }).data;
 
-    document.getElementById("content").innerHTML =
-"<pre>"+JSON.stringify(assets[0], null, 2)+"</pre>";
-
-return;
-
 const teacherAssets = assets.filter(a =>
     a["Employee ID"] &&
     a["Employee ID"].trim() === teacherID.trim()
 );
 
 if(teacherAssets.length === 0){
-
-document.getElementById("content").innerHTML = "<h2>No records found.</h2>";
-
-return;
 
 }
 
