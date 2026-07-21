@@ -11,7 +11,7 @@
 
 body{
     font-family:Arial, Helvetica, sans-serif;
-    background:#eef5f0;
+    background:linear-gradient(135deg,#edf4ff,#fff8e8);
     margin:0;
     padding:20px;
 }
@@ -23,27 +23,54 @@ body{
     background:white;
     padding:30px;
     border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+    border-top:8px solid #003399;
 
 }
 
 .header{
+    background:#003399;
+    color:white;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.logos{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    object-fit:contain;
+    background:white;
+    padding:5px;
+    border-radius:50%;
+}
+
+.title{
+    flex:1;
     text-align:center;
-    margin-bottom:20px;
 }
 
 .header h1{
+    margin:0;
+    color:#FFD700;
+    font-size:34px;
+}
 
-    color:#006633;
-    margin-bottom:5px;
-
+.header h2{
+    margin:5px 0;
+    color:white;
 }
 
 .header p{
-
-    color:#555;
-    margin-top:0;
-
+    margin:5px 0 0;
+    color:#eeeeee;
 }
 
 
@@ -123,11 +150,23 @@ td:first-child{
 
 <div class="header">
 
-<h1>MAMBAGO-A ELEMENTARY SCHOOL</h1>
+<div class="logos">
 
-<h2>Project FASTER</h2>
+<img src="deped-logo.png" class="logo">
+
+<div class="title">
+
+<h1>PROJECT FASTER</h1>
+
+<h2>Mambago-A Elementary School</h2>
 
 <p>Fixed Assets and Supplies Tracking through Electronic Records</p>
+
+</div>
+
+<img src="maes-logo.png" class="logo">
+
+</div>
 
 </div>
 
@@ -143,8 +182,13 @@ Loading asset...
 
 <div class="footer">
 
-Scan verified through Project FASTER<br>
-SY 2026-2027
+<strong>Department of Education</strong><br>
+
+Mambago-A Elementary School<br>
+
+Project FASTER<br>
+
+School Year 2026–2027
 
 </div>
 
